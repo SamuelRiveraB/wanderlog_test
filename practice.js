@@ -30,6 +30,14 @@ function readLine() {
  */
 
 function aPlusB(lines) {
+  const number = parseInt(lines[0]);
+  const results = [];
+
+  for (let i = 1; i <= number; i++) {
+    const [a, b] = lines[i].split(" ").map(Number);
+    results.push(a + b);
+  }
+  return results;
   // Write your code here
   //
   // WARNING: Please do not use GitHub Copilot, ChatGPT, or other AI assistants
