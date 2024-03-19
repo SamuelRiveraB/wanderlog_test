@@ -14,7 +14,6 @@ process.stdin.on("data", function (inputStdin) {
 
 process.stdin.on("end", function () {
   inputString = inputString.split("\n");
-
   main();
 });
 
@@ -30,12 +29,11 @@ function readLine() {
  */
 
 function aPlusB(lines) {
-  const number = parseInt(lines[0]);
-  const results = [];
+  const results = [lines.length];
 
-  for (let i = 1; i <= number; i++) {
-    const [a, b] = lines[i].split(" ").map(Number);
-    results.push(a + b);
+  for (let i = 0; i < lines.length; i++) {
+    const digits = lines[i].split(" ").map(Number);
+    results.push(digits[0] + digits[1]);
   }
   return results;
   // Write your code here
@@ -52,7 +50,6 @@ function main() {
   const ws = process.stdout;
 
   const linesCount = parseInt(readLine().trim(), 10);
-
   let lines = [];
 
   for (let i = 0; i < linesCount; i++) {
