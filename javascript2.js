@@ -22,15 +22,6 @@ function readLine() {
   return inputString[currentLine++];
 }
 
-/*
- * Complete the 'processLogs' function below.
- *
- * The function is expected to return a STRING_ARRAY.
- * The function accepts following parameters:
- *  1. STRING_ARRAY logs
- *  2. INTEGER maxSpan
- */
-
 function processLogs(logs, maxSpan) {
   const parsedLogs = logs.map((log) => {
     // First we create an array of objects to get the attributes
