@@ -30,7 +30,26 @@ function readLine() {
  */
 
 function groupTransactions(transactions) {
-  console.log(transactions);
+  const counts = {};
+
+  transactions.forEach((tx) => {
+    counts[tx] = (counts[tx] || 0) + 1;
+  });
+
+  const countsArray = Object.entries(counts).map(
+    ([tx, count]) => `${tx} ${count}`
+  );
+  countsArray.sort((a, b) => {
+    const countA = parseInt(a.split(" ")[1]);
+    const countB = parseInt(b.split(" ")[1]);
+    if (countA === countB) {
+      const itemA = a.split(" ")[0];
+      const itemB = b.split(" ")[0];
+      return itemA.localeCompare(itemB);
+    }
+    return countB - countA;
+  });
+  return countsArray;
   // Write your code here
 
   //
