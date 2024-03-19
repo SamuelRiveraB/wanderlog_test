@@ -29,7 +29,7 @@ function readLine() {
  */
 
 function aPlusB(lines) {
-  const results = [lines.length];
+  const results = [];
 
   for (let i = 0; i < lines.length; i++) {
     const digits = lines[i].split(" ").map(Number);
