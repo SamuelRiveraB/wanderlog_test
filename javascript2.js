@@ -33,47 +33,47 @@ function readLine() {
 
 function processLogs(logs, maxSpan) {
   const parsedLogs = logs.map((log) => {
-    const [id, timestamp, eventType] = log.split(" ");
+    // First we create an array of objects to get the attributes
+    const [id, timestamp, eventType] = log.split(" "); // Destructuring to get each part of the string "30 10 sign-in"
     return {
+      // Each key value is stored
       id: parseInt(id),
       timestamp: parseInt(timestamp),
       eventType,
     };
-  });
+  }); // At the end the array comes like [{ id:99, timestamp: 1, eventType: 'sign-in'}, {...}]
+  console.log("parsedLogs", parsedLogs);
 
   const groupedLogs = parsedLogs.reduce((acc, log) => {
+    // Here we group each log by the id
     if (!acc[log.id]) {
-      acc[log.id] = [];
+      // First if we dont have the key of the log id
+      acc[log.id] = []; // We create the key and add an empty array
     }
-    acc[log.id].push(log);
+    acc[log.id].push(log); // Then we enter the entire log into the arrray (Here each log is an object)
     return acc;
-  }, {});
+  }, {}); // At the end the object groupedLogs ends up like { "50": [{id: 50, timestamp: 20, eventType: "sign-in"}, {... eventType: 'sign-out'}], "99": ...}
 
-  const differences = [];
+  const differences = []; // Now we create an empty array to store the differences
   for (const id in groupedLogs) {
-    const group = groupedLogs[id];
+    // For each key in groupedLogs
+    const group = groupedLogs[id]; // Each group is the array containg the pairings sign-in sign-out
     if (group.length >= 2) {
-      const signInEvent = group.find((log) => log.eventType === "sign-in");
+      // If we have the 2 objects sign-in and sign-out
+      const signInEvent = group.find((log) => log.eventType === "sign-in"); // We find the events, each log is an object so we find by the eventType key
       const signOutEvent = group.find((log) => log.eventType === "sign-out");
       if (signInEvent && signOutEvent) {
-        const difference = signOutEvent.timestamp - signInEvent.timestamp;
+        // If we found both events
+        const difference = signOutEvent.timestamp - signInEvent.timestamp; // This is the difference between sign-out and sign-in
         if (difference <= maxSpan) {
-          differences.push(signInEvent.id);
+          // If the difference is less than or equal to the given span
+          differences.push(signInEvent.id); // We populate the differences array with the id (signInEvent.id or SignOutEvent.id are the same)
         }
       }
     }
   }
 
-  return differences;
-  // Write your code here
-
-  //
-  // WARNING: Please do not use GitHub Copilot, ChatGPT, or other AI assistants
-  //          when solving this problem!
-  //
-  // We use these tools in our coding too, but in our interviews, we also don't
-  // allow using these, and want to see how we do without them.
-  //
+  return differences; // Finally we return the differences array
 }
 
 function main() {

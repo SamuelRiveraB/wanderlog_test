@@ -22,13 +22,6 @@ function readLine() {
   return inputString[currentLine++];
 }
 
-/*
- * Complete the 'groupTransactions' function below.
- *
- * The function is expected to return a STRING_ARRAY.
- * The function accepts STRING_ARRAY transactions as parameter.
- */
-
 function groupTransactions(transactions) {
   // First we create an empty object to keep the counts
   const counts = {};
@@ -43,7 +36,7 @@ function groupTransactions(transactions) {
   const countsArray = Object.entries(counts).map(
     ([tx, count]) => `${tx} ${count}` // This array receives each object entry in a string so the array ends up like ["prune 2", "banana 1"]
   );
-  console.log(countsArray);
+
   countsArray.sort((a, b) => {
     // Now it's time to order the array
     const countA = parseInt(a.split(" ")[1]); // We get the counts from the array items: "prune 2" gets the 2
